@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pet Snack Tracker Prototype</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell" aria-label="Pet Snack Tracker prototype">
+    <section class="phone-frame">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrow">Snack expiry tracker</p>
+          <h1 data-i18n="appTitle">Pet Snack Tracker</h1>
+        </div>
+        <button class="icon-button" type="button" id="quickAddButton" aria-label="Add snack">
+          <span aria-hidden="true">+</span>
+        </button>
+      </header>
+
+      <section class="screen active" id="screen-snacks" aria-labelledby="snacksTitle">
+        <div class="hero-panel">
+          <div>
+            <p class="panel-label" data-i18n="todayFocus">Today's focus</p>
+            <h2 id="focusTitle">3 snacks need attention</h2>
+          </div>
+          <div class="focus-count" aria-hidden="true">
+            <span id="focusCount">3</span>
+          </div>
+        </div>
+
+        <div class="summary-strip" aria-label="Snack summary">
+          <div>
+            <strong id="totalCount">0</strong>
+            <span data-i18n="inStock">In stock</span>
+          </div>
+          <div>
+            <strong id="soonCount">0</strong>
+            <span data-i18n="expiringSoon">Expiring soon</span>
+          </div>
+          <div>
+            <strong id="expiredCount">0</strong>
+            <span data-i18n="expired">Expired</span>
+          </div>
+        </div>
+
+        <div class="search-row">
+          <label class="search-field">
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="searchInput" type="search" autocomplete="off" data-i18n-placeholder="searchPlaceholder" placeholder="Search snacks">
+          </label>
+        </div>
+
+        <div class="filter-row" role="tablist" aria-label="Snack status filters">
+          <button class="filter-chip active" type="button" data-filter="all" data-i18n="filterAll">All</button>
+          <button class="filter-chip" type="button" data-filter="soon" data-i18n="filterSoon">Soon</button>
+          <button class="filter-chip" type="button" data-filter="expired" data-i18n="filterExpired">Expired</button>
+          <button class="filter-chip" type="button" data-filter="fresh" data-i18n="filterFresh">Fresh</button>
+        </div>
+
+        <section class="snack-list" id="snackList" aria-live="polite"></section>
+
+        <section class="empty-state hidden" id="emptyState">
+          <div class="empty-mark" aria-hidden="true"></div>
+          <h2 data-i18n="emptyTitle">No snacks yet</h2>
+          <p data-i18n="emptyBody">Add the first treat and we'll keep its expiry date visible.</p>
+          <button class="primary-button" type="button" id="emptyAddButton" data-i18n="addSnack">Add Snack</button>
+        </section>
+      </section>
+
+      <section class="screen" id="screen-add" aria-labelledby="addTitle">
+        <div class="section-heading">
+          <p class="panel-label" data-i18n="quickEntry">Quick entry</p>
+          <h2 id="addTitle" data-i18n="addSnack">Add Snack</h2>
+        </div>
+
+        <form class="snack-form" id="snackForm">
+          <input type="hidden" id="editingId">
+
+          <label>
+            <span data-i18n="snackName">Snack name</span>
+            <input id="nameInput" type="text" required maxlength="48" data-i18n-placeholder="snackNamePlaceholder" placeholder="Chicken bites">
+          </label>
+
+          <div class="form-grid">
+            <label>
+              <span data-i18n="petName">Pet</span>
+              <input id="petInput" type="text" maxlength="32" data-i18n-placeholder="petNamePlaceholder" placeholder="Mochi">
+            </label>
+            <label>
+              <span data-i18n="category">Category</span>
+              <select id="categoryInput">
+                <option value="freezeDried" data-i18n="categoryFreezeDried">Freeze-dried</option>
+                <option value="canned" data-i18n="categoryCanned">Canned</option>
+                <option value="jerky" data-i18n="categoryJerky">Jerky</option>
+                <option value="dental" data-i18n="categoryDental">Dental</option>
+                <option value="supplement" data-i18n="categorySupplement">Supplement</option>
+                <option value="other" data-i18n="categoryOther">Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              <span data-i18n="quantity">Quantity</span>
+              <input id="quantityInput" type="number" min="1" value="1">
+            </label>
+            <label>
+              <span data-i18n="unit">Unit</span>
+              <select id="unitInput">
+                <option value="bag" data-i18n="unitBag">bag</option>
+                <option value="can" data-i18n="unitCan">can</option>
+                <option value="box" data-i18n="unitBox">box</option>
+                <option value="stick" data-i18n="unitStick">stick</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span data-i18n="expiryDate">Expiry date</span>
+            <input id="expiryInput" type="date" required>
+          </label>
+
+          <label class="toggle-row">
+            <span>
+              <strong data-i18n="opened">Opened</strong>
+              <small data-i18n="openedHint">Track treats that should be finished sooner.</small>
+            </span>
+            <input id="openedInput" type="checkbox">
+          </label>
+
+          <label>
+            <span data-i18n="reminder">Reminder</span>
+            <select id="reminderInput">
+              <option value="1" data-i18n="reminder1">1 day before</option>
+              <option value="3" data-i18n="reminder3">3 days before</option>
+              <option value="7" selected data-i18n="reminder7">7 days before</option>
+              <option value="14" data-i18n="reminder14">14 days before</option>
+              <option value="30" data-i18n="reminder30">30 days before</option>
+            </select>
+          </label>
+
+          <label>
+            <span data-i18n="notes">Notes</span>
+            <textarea id="notesInput" rows="3" maxlength="140" data-i18n-placeholder="notesPlaceholder" placeholder="Shelf location, flavor, or feeding note"></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button class="secondary-button" type="button" id="cancelEditButton" data-i18n="cancel">Cancel</button>
+            <button class="primary-button" type="submit" data-i18n="saveSnack">Save Snack</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="screen" id="screen-history" aria-labelledby="historyTitle">
+        <div class="section-heading">
+          <p class="panel-label" data-i18n="finishedArchive">Finished archive</p>
+          <h2 id="historyTitle" data-i18n="history">History</h2>
+        </div>
+        <section class="snack-list" id="historyList"></section>
+        <section class="empty-state compact hidden" id="historyEmpty">
+          <div class="empty-mark" aria-hidden="true"></div>
+          <h2 data-i18n="historyEmptyTitle">Nothing finished yet</h2>
+          <p data-i18n="historyEmptyBody">Finished snacks will move here automatically.</p>
+        </section>
+      </section>
+
+      <section class="screen" id="screen-settings" aria-labelledby="settingsTitle">
+        <div class="section-heading">
+          <p class="panel-label" data-i18n="preferences">Preferences</p>
+          <h2 id="settingsTitle" data-i18n="settings">Settings</h2>
+        </div>
+
+        <div class="settings-group">
+          <label>
+            <span data-i18n="language">Language</span>
+            <select id="languageSelect">
+              <option value="en">English</option>
+              <option value="zh">简体中文</option>
+            </select>
+          </label>
+
+          <label>
+            <span data-i18n="defaultReminder">Default reminder</span>
+            <select id="defaultReminderSelect">
+              <option value="1" data-i18n="reminder1">1 day before</option>
+              <option value="3" data-i18n="reminder3">3 days before</option>
+              <option value="7" data-i18n="reminder7">7 days before</option>
+              <option value="14" data-i18n="reminder14">14 days before</option>
+              <option value="30" data-i18n="reminder30">30 days before</option>
+            </select>
+          </label>
+
+          <button class="secondary-button full-width" type="button" id="resetButton" data-i18n="resetDemo">Reset demo data</button>
+        </div>
+
+        <div class="notice-panel">
+          <h3 data-i18n="prototypeNoteTitle">Prototype note</h3>
+          <p data-i18n="prototypeNoteBody">This version simulates reminder logic. Native notification scheduling comes in the app build.</p>
+        </div>
+      </section>
+
+      <nav class="bottom-nav" aria-label="Primary navigation">
+        <button class="nav-item active" type="button" data-screen="snacks">
+          <span class="nav-icon inventory" aria-hidden="true"></span>
+          <span data-i18n="navSnacks">Snacks</span>
+        </button>
+        <button class="nav-item" type="button" data-screen="add">
+          <span class="nav-icon add" aria-hidden="true"></span>
+          <span data-i18n="navAdd">Add</span>
+        </button>
+        <button class="nav-item" type="button" data-screen="history">
+          <span class="nav-icon history" aria-hidden="true"></span>
+          <span data-i18n="navHistory">History</span>
+        </button>
+        <button class="nav-item" type="button" data-screen="settings">
+          <span class="nav-icon settings" aria-hidden="true"></span>
+          <span data-i18n="navSettings">Settings</span>
+        </button>
+      </nav>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
