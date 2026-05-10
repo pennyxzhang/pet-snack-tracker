@@ -1,8 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputPath = path.resolve(process.cwd(), "PRD.md");
-const outputPath = path.resolve(process.cwd(), "PRD_print.html");
+const inputPath = path.resolve(process.cwd(), process.argv[2] ?? "PRD.md");
+const outputPath = path.resolve(process.cwd(), process.argv[3] ?? "PRD_print.html");
+const documentTitle = process.argv[4] ?? "Pet Snack Tracker";
+const documentKicker = process.argv[5] ?? "Product Requirements Document";
 
 const source = fs.readFileSync(inputPath, "utf8");
 
@@ -128,7 +130,7 @@ const document = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pet Snack Tracker PRD</title>
+  <title>${escapeHtml(documentTitle)}</title>
   <style>
     @font-face {
       font-family: "PRD Noto Sans CJK SC";
@@ -167,8 +169,8 @@ const document = `<!doctype html>
     main {
       width: 210mm;
       min-height: 297mm;
-      margin: 24px auto;
-      padding: 20mm 18mm;
+      margin: 18px auto;
+      padding: 15mm 16mm;
       background: #fff;
       box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
     }
@@ -190,23 +192,23 @@ const document = `<!doctype html>
     h1 {
       margin: 0 0 10px;
       color: #111827;
-      font-size: 26pt;
+      font-size: 23pt;
       line-height: 1.15;
       page-break-after: avoid;
     }
 
     h2 {
-      margin: 24px 0 8px;
-      padding-top: 10px;
+      margin: 18px 0 7px;
+      padding-top: 8px;
       border-top: 1px solid #d9dee7;
       color: #111827;
-      font-size: 16pt;
+      font-size: 14.5pt;
       line-height: 1.3;
       page-break-after: avoid;
     }
 
     h3 {
-      margin: 16px 0 6px;
+      margin: 13px 0 5px;
       color: #263445;
       font-size: 12.5pt;
       line-height: 1.35;
@@ -214,11 +216,11 @@ const document = `<!doctype html>
     }
 
     p {
-      margin: 5px 0 8px;
+      margin: 4px 0 7px;
     }
 
     ul {
-      margin: 5px 0 10px 18px;
+      margin: 5px 0 9px 18px;
       padding: 0;
     }
 
@@ -232,9 +234,8 @@ const document = `<!doctype html>
 
     table {
       width: 100%;
-      margin: 10px 0 16px;
+      margin: 8px 0 13px;
       border-collapse: collapse;
-      page-break-inside: avoid;
       font-size: 9.5pt;
     }
 
@@ -292,9 +293,9 @@ const document = `<!doctype html>
 <body>
   <main>
     <section class="cover">
-      <p class="eyebrow">Product Requirements Document</p>
-      <h1>Pet Snack Tracker</h1>
-      <p class="meta">Printable PRD generated from PRD.md on ${today}</p>
+      <p class="eyebrow">${inlineMarkdown(documentKicker)}</p>
+      <h1>${inlineMarkdown(documentTitle)}</h1>
+      <p class="meta">Printable document generated from ${escapeHtml(path.basename(inputPath))} on ${today}</p>
     </section>
 ${body.replace(/^<h1>.*?<\/h1>\n?/, "")}
   </main>
