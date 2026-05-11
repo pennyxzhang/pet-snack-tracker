@@ -25,7 +25,9 @@
           <h1 data-i18n="appTitle">Pet Snack Tracker</h1>
         </div>
         <button class="icon-button" type="button" id="quickAddButton" aria-label="Add snack">
-          <span aria-hidden="true">+</span>
+          <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M5 12h14m-7-7v14"></path>
+          </svg>
         </button>
       </header>
 
@@ -57,7 +59,10 @@
 
         <div class="search-row">
           <label class="search-field">
-            <span class="search-icon" aria-hidden="true"></span>
+            <svg class="ui-icon search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m21 21-4.34-4.34"></path>
+              <circle cx="11" cy="11" r="8"></circle>
+            </svg>
             <input id="searchInput" type="search" autocomplete="off" data-i18n-placeholder="searchPlaceholder" placeholder="Search snacks">
           </label>
         </div>
@@ -72,7 +77,10 @@
         <section class="snack-list" id="snackList" aria-live="polite"></section>
 
         <section class="empty-state hidden" id="emptyState">
-          <div class="empty-mark" aria-hidden="true"></div>
+          <svg class="ui-icon empty-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 22V12m4 5h6m-3-3v6m2-9.465V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.675-.955"></path>
+            <path d="M3.29 7 12 12l8.71-5M7.5 4.27l8.997 5.148"></path>
+          </svg>
           <h2 data-i18n="emptyTitle">No snacks yet</h2>
           <p data-i18n="emptyBody">Add the first treat and we'll keep its expiry date visible.</p>
           <button class="primary-button" type="button" id="emptyAddButton" data-i18n="addSnack">Add Snack</button>
@@ -86,7 +94,9 @@
         </div>
 
         <button class="scan-button" type="button" id="scanButton">
-          <span class="scan-icon" aria-hidden="true"></span>
+          <svg class="ui-icon scan-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M8 7v10m4-10v10m5-10v10"></path>
+          </svg>
           <span>
             <strong data-i18n="scanProduct">Scan product code</strong>
             <small data-i18n="scanHint">Coming in native app. Manual entry works now.</small>
@@ -187,7 +197,10 @@
         </div>
         <section class="snack-list" id="historyList"></section>
         <section class="empty-state compact hidden" id="historyEmpty">
-          <div class="empty-mark" aria-hidden="true"></div>
+          <svg class="ui-icon empty-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 22V12m4 5h6m-3-3v6m2-9.465V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.675-.955"></path>
+            <path d="M3.29 7 12 12l8.71-5M7.5 4.27l8.997 5.148"></path>
+          </svg>
           <h2 data-i18n="historyEmptyTitle">Nothing finished yet</h2>
           <p data-i18n="historyEmptyBody">Finished snacks will move here automatically.</p>
         </section>
@@ -205,7 +218,9 @@
               <strong data-i18n="managePets">Manage pets</strong>
               <small id="petsSummary">2 pets</small>
             </span>
-            <span aria-hidden="true">›</span>
+            <svg class="ui-icon link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
           </button>
 
           <label>
@@ -267,19 +282,32 @@
 
       <nav class="bottom-nav" aria-label="Primary navigation">
         <button class="nav-item active" type="button" data-screen="snacks">
-          <span class="nav-icon inventory" aria-hidden="true"></span>
+          <svg class="ui-icon nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m7.5 4.27 9 5.15"></path>
+            <path d="M3.29 7 12 12l8.71-5"></path>
+            <path d="M12 22V12"></path>
+            <path d="m4 6.27 7-4a2 2 0 0 1 2 0l7 4A2 2 0 0 1 21 8v8a2 2 0 0 1-1 1.73l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 16V8a2 2 0 0 1 1-1.73Z"></path>
+          </svg>
           <span data-i18n="navSnacks">Snacks</span>
         </button>
         <button class="nav-item" type="button" data-screen="add">
-          <span class="nav-icon add" aria-hidden="true"></span>
+          <svg class="ui-icon nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M5 12h14m-7-7v14"></path>
+          </svg>
           <span data-i18n="navAdd">Add</span>
         </button>
         <button class="nav-item" type="button" data-screen="history">
-          <span class="nav-icon history" aria-hidden="true"></span>
+          <svg class="ui-icon nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6h4"></path>
+          </svg>
           <span data-i18n="navHistory">History</span>
         </button>
         <button class="nav-item" type="button" data-screen="settings">
-          <span class="nav-icon settings" aria-hidden="true"></span>
+          <svg class="ui-icon nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
           <span data-i18n="navSettings">Settings</span>
         </button>
       </nav>
