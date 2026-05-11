@@ -23,10 +23,10 @@
         <div class="hero-panel">
           <div>
             <p class="panel-label" data-i18n="todayFocus">Today's focus</p>
-            <h2 id="focusTitle">3 snacks need attention</h2>
+            <h2 id="focusTitle">Everything looks fresh</h2>
           </div>
           <div class="focus-count" aria-hidden="true">
-            <span id="focusCount">3</span>
+            <span id="focusCount">0</span>
           </div>
         </div>
 
@@ -75,44 +75,72 @@
           <h2 id="addTitle" data-i18n="addSnack">Add Snack</h2>
         </div>
 
+        <button class="scan-button" type="button" id="scanButton">
+          <span class="scan-icon" aria-hidden="true"></span>
+          <span>
+            <strong data-i18n="scanProduct">Scan product code</strong>
+            <small data-i18n="scanHint">Coming in native app. Manual entry works now.</small>
+          </span>
+        </button>
+
         <form class="snack-form" id="snackForm">
           <input type="hidden" id="editingId">
 
           <label>
-            <span data-i18n="snackName">Snack name</span>
-            <input id="nameInput" type="text" required maxlength="48" data-i18n-placeholder="snackNamePlaceholder" placeholder="Chicken bites">
+            <span data-i18n="brand">Brand</span>
+            <input id="brandInput" list="brandOptions" type="text" maxlength="48" autocomplete="off" data-i18n-placeholder="brandPlaceholder" placeholder="Inaba">
+            <datalist id="brandOptions"></datalist>
+          </label>
+
+          <label>
+            <span data-i18n="productName">Product name</span>
+            <input id="nameInput" list="productOptions" type="text" required maxlength="96" autocomplete="off" data-i18n-placeholder="snackNamePlaceholder" placeholder="Churu Puree Chicken Recipe">
+            <datalist id="productOptions"></datalist>
+          </label>
+
+          <label>
+            <span data-i18n="pets">Pets</span>
+            <div class="pet-picker" id="petPicker" aria-label="Pet picker"></div>
+            <small class="field-help" data-i18n="petPickerHelp">Choose one, many, or leave empty for a shared snack.</small>
           </label>
 
           <div class="form-grid">
             <label>
-              <span data-i18n="petName">Pet</span>
-              <input id="petInput" type="text" maxlength="32" data-i18n-placeholder="petNamePlaceholder" placeholder="Mochi">
-            </label>
-            <label>
               <span data-i18n="category">Category</span>
               <select id="categoryInput">
-                <option value="freezeDried" data-i18n="categoryFreezeDried">Freeze-dried</option>
-                <option value="canned" data-i18n="categoryCanned">Canned</option>
-                <option value="jerky" data-i18n="categoryJerky">Jerky</option>
+                <option value="treat" data-i18n="categoryTreat">Treat</option>
+                <option value="wetFood" data-i18n="categoryWetFood">Wet food</option>
+                <option value="dryFood" data-i18n="categoryDryFood">Dry food</option>
                 <option value="dental" data-i18n="categoryDental">Dental</option>
                 <option value="supplement" data-i18n="categorySupplement">Supplement</option>
                 <option value="other" data-i18n="categoryOther">Other</option>
               </select>
             </label>
-          </div>
-
-          <div class="form-grid">
             <label>
               <span data-i18n="quantity">Quantity</span>
               <input id="quantityInput" type="number" min="1" value="1">
             </label>
+          </div>
+
+          <div class="form-grid">
             <label>
               <span data-i18n="unit">Unit</span>
               <select id="unitInput">
+                <option value="pack" data-i18n="unitPack">pack</option>
                 <option value="bag" data-i18n="unitBag">bag</option>
                 <option value="can" data-i18n="unitCan">can</option>
                 <option value="box" data-i18n="unitBox">box</option>
                 <option value="stick" data-i18n="unitStick">stick</option>
+              </select>
+            </label>
+            <label>
+              <span data-i18n="reminder">Reminder</span>
+              <select id="reminderInput">
+                <option value="1" data-i18n="reminder1">1 day before</option>
+                <option value="3" data-i18n="reminder3">3 days before</option>
+                <option value="7" selected data-i18n="reminder7">7 days before</option>
+                <option value="14" data-i18n="reminder14">14 days before</option>
+                <option value="30" data-i18n="reminder30">30 days before</option>
               </select>
             </label>
           </div>
@@ -128,17 +156,6 @@
               <small data-i18n="openedHint">Track treats that should be finished sooner.</small>
             </span>
             <input id="openedInput" type="checkbox">
-          </label>
-
-          <label>
-            <span data-i18n="reminder">Reminder</span>
-            <select id="reminderInput">
-              <option value="1" data-i18n="reminder1">1 day before</option>
-              <option value="3" data-i18n="reminder3">3 days before</option>
-              <option value="7" selected data-i18n="reminder7">7 days before</option>
-              <option value="14" data-i18n="reminder14">14 days before</option>
-              <option value="30" data-i18n="reminder30">30 days before</option>
-            </select>
           </label>
 
           <label>
@@ -173,6 +190,14 @@
         </div>
 
         <div class="settings-group">
+          <button class="settings-link" type="button" id="managePetsButton">
+            <span>
+              <strong data-i18n="managePets">Manage pets</strong>
+              <small id="petsSummary">2 pets</small>
+            </span>
+            <span aria-hidden="true">›</span>
+          </button>
+
           <label>
             <span data-i18n="language">Language</span>
             <select id="languageSelect">
@@ -199,6 +224,35 @@
           <h3 data-i18n="prototypeNoteTitle">Prototype note</h3>
           <p data-i18n="prototypeNoteBody">This version simulates reminder logic. Native notification scheduling comes in the app build.</p>
         </div>
+      </section>
+
+      <section class="screen" id="screen-pets" aria-labelledby="petsTitle">
+        <div class="section-heading with-action">
+          <div>
+            <p class="panel-label" data-i18n="household">Household</p>
+            <h2 id="petsTitle" data-i18n="managePets">Manage pets</h2>
+          </div>
+          <button class="small-button" type="button" id="backToSettingsButton" data-i18n="settings">Settings</button>
+        </div>
+
+        <form class="pet-form" id="petForm">
+          <input type="hidden" id="editingPetId">
+          <label>
+            <span data-i18n="petName">Pet name</span>
+            <input id="petNameInput" type="text" maxlength="32" data-i18n-placeholder="petNamePlaceholder" placeholder="Feifei">
+          </label>
+          <label>
+            <span data-i18n="species">Species</span>
+            <select id="speciesInput">
+              <option value="cat" data-i18n="speciesCat">Cat</option>
+              <option value="dog" data-i18n="speciesDog">Dog</option>
+              <option value="other" data-i18n="speciesOther">Other</option>
+            </select>
+          </label>
+          <button class="primary-button" type="submit" data-i18n="savePet">Save Pet</button>
+        </form>
+
+        <section class="pet-list" id="petList"></section>
       </section>
 
       <nav class="bottom-nav" aria-label="Primary navigation">

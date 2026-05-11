@@ -15,6 +15,7 @@ Completed so far:
 - Snack inventory list, add/edit form, status filtering, search, finished history.
 - UAT requirement updates for brand autocomplete, product name autocomplete, pet management, and scan entry planning.
 - MVP decision log and 2-week execution calendar.
+- Prototype update with real UAT sample data, Feifei and Daniel pet profiles, brand/product autocomplete, multi-pet selection, pet management, and scan-entry placeholder.
 
 Live prototype:
 
@@ -45,8 +46,7 @@ Live prototype:
 
 ## Next Steps
 
-- Update the prototype with brand autocomplete.
-- Add product name autocomplete and brand-linked suggestions.
-- Add pet management and multi-pet selection.
-- Add scan entry UI placeholder with clear fallback copy.
-- Deploy the next prototype build for another phone-based UAT round.
+- Test the updated prototype on phone with real household scenarios.
+- Refine add-snack flow based on UAT feedback.
+- Research free barcode/product lookup coverage with real packaging samples.
+- Continue visual polish toward a warm, fresh, lightly hand-drawn mobile app style.
