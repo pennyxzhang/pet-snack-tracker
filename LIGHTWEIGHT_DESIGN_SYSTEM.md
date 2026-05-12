@@ -247,7 +247,35 @@ Expired reminders should be clear, but avoid large red areas that make the app f
 | `04 Flows` | 添加零食、宠物管理等流程 | Add snack, pet management, and other flows |
 | `05 Playground` | 视觉探索区 | Visual exploration area |
 
-## 11. 当前优先级 / Current Priority
+## 11. 当前视觉迭代 / Current Visual Iteration
+
+**中文**
+
+当前 prototype 已先试穿 Moon Design System 的视觉骨架。我们没有完整照搬 Moon 的品牌，而是先采用它适合移动端产品的部分：
+
+- 更圆润的控件和卡片。
+- 4px / 8px / 12px / 16px 的间距与圆角节奏。
+- pill chip、清晰输入框、弱边框、浅底卡片。
+- 使用 Moon 的 `piccolo` 紫色作为试穿阶段的主操作色。
+- 使用 `hit` 青绿色承接 Pet Snack Tracker 原有的清新感。
+- 功能图标统一改为 better-icons / lucide SVG。
+
+这版视觉可以作为 Figma 迭代起点。颜色和字体仍然开放调整；如果 Moon 的紫色过冷，可以保留 Moon 的组件结构，把主色切回更温暖的 sage / honey 方向。
+
+**English**
+
+The current prototype is wearing a Moon Design System inspired visual baseline. We are not copying Moon as a brand system wholesale; instead, we are borrowing the parts that work well for a mobile product:
+
+- Rounder controls and cards.
+- 4px / 8px / 12px / 16px spacing and radius rhythm.
+- Pill chips, clear input fields, soft borders, and light surfaces.
+- Moon `piccolo` purple as the trial primary action color.
+- Moon `hit` teal to preserve Pet Snack Tracker's fresh tone.
+- Functional icons standardized with better-icons / lucide SVGs.
+
+This version should be treated as a Figma iteration baseline. Colors and typography remain open for refinement; if Moon purple feels too cool, we can keep the component structure and move the primary color back toward warmer sage / honey tones.
+
+## 12. 当前优先级 / Current Priority
 
 **中文**
 
@@ -267,7 +295,7 @@ At this stage, we do not need a full enterprise-grade design system. The priorit
 - Keep Figma edits and code implementation in sync.
 - Prepare a basic component language for future native development.
 
-## 12. 后续行动 / Next Actions
+## 13. 后续行动 / Next Actions
 
 **中文**
 
