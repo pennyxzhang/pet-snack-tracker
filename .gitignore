@@ -1,4 +1,5 @@
 .DS_Store
+.build/
 prototype-home.png
 prototype-add.png
 mvp-calendar-page1.png

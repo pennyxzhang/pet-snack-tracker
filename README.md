@@ -59,6 +59,11 @@ Live prototype:
 - [styles.css](./styles.css)
 - [app.js](./app.js)
 
+## Native iOS App
+
+- [ios/PetSnackTracker.xcodeproj](./ios/PetSnackTracker.xcodeproj)
+- [ios/PetSnackTracker/README.md](./ios/PetSnackTracker/README.md)
+
 ## Next Steps
 
 - Test the updated prototype on phone with real household scenarios.
