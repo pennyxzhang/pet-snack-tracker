@@ -252,11 +252,11 @@ Android：
 
 ## 推荐下一步
 
-1. 先收集 10 个真实包装的 barcode、产品名、品牌和保质期照片。
+1. 先用 [BARCODE_SAMPLE_TESTING_TEMPLATE.csv](./BARCODE_SAMPLE_TESTING_TEMPLATE.csv) 收集 10 个真实包装的 barcode、产品名、品牌和保质期照片。
 2. 我们用这些样本做 Open Food Facts 覆盖率测试。
 3. 同时确认第一版原生 app 是否 iOS-first。
-4. 如果 iOS-first 成立，下一份文档拆 iOS MVP task list。
-5. 之后再开始 SwiftUI scanner spike。
+4. 使用 [IOS_SCANNER_SPIKE_TASKS.md](./IOS_SCANNER_SPIKE_TASKS.md) 拆解 iOS scanner spike。
+5. 之后再开始 SwiftUI scanner demo。
 
 ## 参考资料
 

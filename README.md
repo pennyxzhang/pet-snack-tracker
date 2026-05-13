@@ -50,6 +50,8 @@ Live prototype:
 - [MVP_DECISION_LOG_AND_CALENDAR.pdf](./MVP_DECISION_LOG_AND_CALENDAR.pdf)
 - [LIGHTWEIGHT_DESIGN_SYSTEM.md](./LIGHTWEIGHT_DESIGN_SYSTEM.md)
 - [BARCODE_NATIVE_RESEARCH_PLAN.md](./BARCODE_NATIVE_RESEARCH_PLAN.md)
+- [IOS_SCANNER_SPIKE_TASKS.md](./IOS_SCANNER_SPIKE_TASKS.md)
+- [BARCODE_SAMPLE_TESTING_TEMPLATE.csv](./BARCODE_SAMPLE_TESTING_TEMPLATE.csv)
 
 ## Prototype Files
 
@@ -63,4 +65,5 @@ Live prototype:
 - Refine add-snack flow based on UAT feedback.
 - Research free barcode/product lookup coverage with real packaging samples.
 - Confirm iOS-first native app scope and run a scanner spike.
+- Fill the barcode sample testing template with real package data.
 - Continue visual polish toward a warm, fresh, lightly hand-drawn mobile app style.
