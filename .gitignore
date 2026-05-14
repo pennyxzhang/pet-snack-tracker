@@ -1,5 +1,7 @@
 .DS_Store
 .build/
+*.xcworkspace/
+xcuserdata/
 prototype-home.png
 prototype-add.png
 mvp-calendar-page1.png

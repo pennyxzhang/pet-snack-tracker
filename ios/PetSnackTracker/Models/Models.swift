@@ -132,6 +132,55 @@ struct Snack: Identifiable, Codable, Equatable {
     }
 }
 
+struct CachedBarcodeProduct: Codable, Equatable {
+    var barcode: String
+    var brand: String
+    var productName: String
+    var updatedAt: Date
+}
+
+enum BarcodeProductCache {
+    private static let storageKey = "petSnackTracker.barcodeProductCache.v1"
+
+    static func product(for barcode: String) -> CachedBarcodeProduct? {
+        products()[normalized(barcode)]
+    }
+
+    static func save(barcode: String?, brand: String, productName: String) {
+        guard let barcode = barcode else { return }
+        let normalizedBarcode = normalized(barcode)
+        let normalizedBrand = brand.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedProductName = productName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalizedBarcode.isEmpty, !normalizedBrand.isEmpty || !normalizedProductName.isEmpty else { return }
+
+        var cachedProducts = products()
+        cachedProducts[normalizedBarcode] = CachedBarcodeProduct(
+            barcode: normalizedBarcode,
+            brand: normalizedBrand,
+            productName: normalizedProductName,
+            updatedAt: .now
+        )
+        save(cachedProducts)
+    }
+
+    private static func products() -> [String: CachedBarcodeProduct] {
+        guard let data = UserDefaults.standard.data(forKey: storageKey),
+              let decoded = try? JSONDecoder().decode([String: CachedBarcodeProduct].self, from: data) else {
+            return [:]
+        }
+        return decoded
+    }
+
+    private static func save(_ products: [String: CachedBarcodeProduct]) {
+        guard let encoded = try? JSONEncoder().encode(products) else { return }
+        UserDefaults.standard.set(encoded, forKey: storageKey)
+    }
+
+    private static func normalized(_ barcode: String) -> String {
+        barcode.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
 enum SnackStatus: String {
     case fresh
     case expiringSoon

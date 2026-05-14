@@ -14,6 +14,11 @@ struct AddSnackView: View {
     @State private var isOpened = false
     @State private var notes = ""
     @State private var isShowingScanner = false
+    @State private var scannedBarcode: String?
+    @State private var scannedBarcodeFormat: String?
+    @State private var lookupSource: String?
+    @State private var lookupStatus: SnackLookupStatus = .skipped
+    @State private var scannedAt: Date?
 
     private let brands = ["Inaba", "Applaws", "CAT FOREST", "Smitten", "Greenies", "Royal Canin"]
     private let products = ["Churu Puree Chicken Recipe", "Juicy Bites Fish And Clam Cat Treat", "Soft & Chewy Sticks Chicken Breast", "Wet Cat Food Mince Beef"]
@@ -33,6 +38,19 @@ struct AddSnackView: View {
                         .foregroundStyle(DesignSystem.piccolo)
                     } footer: {
                         Text("Scanner will try to fill brand and product name. Expiry date stays manual.")
+                    }
+
+                    if let scannedBarcode {
+                        Section("Scanned product code") {
+                            LabeledContent("Barcode", value: scannedBarcode)
+                            if let scannedBarcodeFormat {
+                                LabeledContent("Format", value: scannedBarcodeFormat)
+                            }
+                            if let lookupSource {
+                                LabeledContent("Lookup source", value: lookupSource)
+                            }
+                            LabeledContent("Lookup status", value: lookupStatus.rawValue.capitalized)
+                        }
                     }
 
                     Section("Snack details") {
@@ -114,7 +132,9 @@ struct AddSnackView: View {
             }
             .navigationTitle("Add Snack")
             .sheet(isPresented: $isShowingScanner) {
-                ScanProductCodeView()
+                ScanProductCodeView { result in
+                    applyScanResult(result)
+                }
             }
         }
     }
@@ -128,9 +148,12 @@ struct AddSnackView: View {
     }
 
     private func saveSnack() {
+        let normalizedBrand = brand.trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedProductName = productName.trimmingCharacters(in: .whitespacesAndNewlines)
+
         let snack = Snack(
-            brand: brand.trimmingCharacters(in: .whitespacesAndNewlines),
-            productName: productName.trimmingCharacters(in: .whitespacesAndNewlines),
+            brand: normalizedBrand,
+            productName: normalizedProductName,
             category: category,
             quantity: quantity,
             unit: unit,
@@ -140,13 +163,28 @@ struct AddSnackView: View {
             isOpened: isOpened,
             notes: notes,
             isFinished: false,
-            barcode: nil,
-            barcodeFormat: nil,
-            lookupSource: nil,
-            lookupStatus: .skipped,
+            barcode: scannedBarcode,
+            barcodeFormat: scannedBarcodeFormat,
+            lookupSource: lookupSource,
+            lookupStatus: lookupStatus,
             productImageURL: nil,
-            scannedAt: nil
+            scannedAt: scannedAt
         )
         store.addSnack(snack)
+        BarcodeProductCache.save(barcode: scannedBarcode, brand: normalizedBrand, productName: normalizedProductName)
+    }
+
+    private func applyScanResult(_ result: ProductScanResult) {
+        if let detectedBrand = result.brand, !detectedBrand.isEmpty {
+            brand = detectedBrand
+        }
+        if let detectedProductName = result.productName, !detectedProductName.isEmpty {
+            productName = detectedProductName
+        }
+        scannedBarcode = result.barcode
+        scannedBarcodeFormat = result.barcodeFormat
+        lookupSource = result.lookupSource
+        lookupStatus = result.lookupStatus
+        scannedAt = result.scannedAt
     }
 }
